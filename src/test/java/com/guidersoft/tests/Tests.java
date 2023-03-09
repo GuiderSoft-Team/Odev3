@@ -23,7 +23,7 @@ public class Tests {
         homePage.open(url);
         homePage.login("deneme@deneme.com", "deneme");
         homePage.logout();
-        Driver.getDriver().quit();
+        Driver.getDriver().quit();      //driver.quit();
     }
 
     @Test

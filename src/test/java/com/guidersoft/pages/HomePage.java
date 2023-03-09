@@ -22,7 +22,7 @@ public class HomePage extends BaseTest {
         driver = driverGelen;
         // driver = Driver.getDriver();  // kullanilabilir, cünkü driver singlton static
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+        driver.manage().window().maximize();
     }
 
     public HomePage(){
