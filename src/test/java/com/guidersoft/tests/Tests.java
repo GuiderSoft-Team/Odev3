@@ -1,0 +1,54 @@
+package com.guidersoft.tests;
+
+import com.guidersoft.pages.HomePage;
+import com.guidersoft.utility.Browsers;
+import com.guidersoft.utility.Driver;
+import com.guidersoft.utils.BaseTest;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.List;
+import static com.guidersoft.utils.Locators.*;
+
+
+public class Tests {
+    WebDriver driver;
+
+    @Test
+    public void loginTest(){
+        driver = Driver.getDriver(Browsers.EDGE);    // parametre CHROME, EDGE, FIREFOX olabilir
+        HomePage homePage = new HomePage(driver);
+        homePage.open(url);
+        homePage.login("deneme@deneme.com", "deneme");
+        homePage.logout();
+        Driver.getDriver().quit();
+    }
+
+    @Test
+    public void searchTest(){
+        //Driver.getDriver(Browsers.SAFARI);    // parametre CHROME, EDGE, FIREFOX olabilir
+        HomePage homePage = new HomePage();
+        homePage.open(url);
+        homePage.search("mac");
+        List<WebElement> list = homePage.getSearchList();
+        Assert.assertEquals(list.size(), 4);
+
+        List<WebElement> listMacBook = homePage.getSearchList("MacBook");
+        Assert.assertEquals(listMacBook.size(), 3);
+    }
+
+    @Test
+    public void hoverMenu(){
+        /*
+            1.  Ana menü üzerinde bastan sona 500ms bekleme ile hover edecek
+                a.  Ana menüdeki 8 adet li'yi bulan locator'i bulun
+                b.  Bu locator ile 8 adet menüyü list'e atin
+                c.  BaseTest'teki hover() ve actionWait()'i kullanarak
+                    menü üzerinde bastan sona gezinti yapin
+
+         */
+
+    }
+}
