@@ -2,6 +2,7 @@ package com.guidersoft.pages;
 
 import com.guidersoft.utility.Driver;
 import com.guidersoft.utils.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.guidersoft.utils.Locators.*;
 
 public class HomePage extends BaseTest {
@@ -71,18 +74,49 @@ public class HomePage extends BaseTest {
             1.  Aldigi text'i search'e send edip ara butonuna tiklayacak
             2.  arama sayfasini geldigini assert edecek
          */
+
+        sendKeys(lSearchInput, text);
+        click(lSearchButton);
+        wait.until(ExpectedConditions.titleContains("Search"));
     }
 
     public List<WebElement> getSearchList(){
         // arama sonucunda listelenen ürünleri element olarak return edecek
-        return null;
+        return driver.findElements(lListedProducts);
     }
 
     public List<WebElement> getSearchList(String text){
         // arama sonucunda listelenen ürünlerinden gelen "text" i icerenleri return edecek
-        return null;
+
+        /*
+        return getSearchList()
+                .stream()
+                .filter(e -> e.getText().contains(text))
+                .collect(Collectors.toList());
+
+         */
+
+        List<WebElement> newList =  getSearchList()
+                .stream()
+                .filter(e -> e.getText().contains(text))
+                .collect(Collectors.toList());
+        return newList;
+
     }
 
 
+    public void walkOverMenu(){
+        List<WebElement> menus = driver.findElements(lMainMenuLinks);
+        for (WebElement element : menus) {
+            hover(element);
+            if(element.findElements(By.xpath(".//ul")).size()>0){
+                List<WebElement> subLists = element.findElements(By.xpath(".//li"));
+                for (WebElement subList : subLists) {
+                    hover(subList);
+                    actionWait(50);
+                }
+            }
+        }
+    }
 
 }

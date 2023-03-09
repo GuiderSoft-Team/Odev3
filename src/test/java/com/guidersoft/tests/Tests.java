@@ -37,6 +37,7 @@ public class Tests {
 
         List<WebElement> listMacBook = homePage.getSearchList("MacBook");
         Assert.assertEquals(listMacBook.size(), 3);
+        Driver.getDriver().quit();
     }
 
     @Test
@@ -50,5 +51,9 @@ public class Tests {
 
          */
 
+        HomePage homePage = new HomePage();
+        homePage.open(url);
+        homePage.walkOverMenu();
+        Driver.getDriver().quit();
     }
 }

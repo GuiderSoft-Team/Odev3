@@ -15,4 +15,12 @@ public interface Locators {
     By lLogoutLink = By.xpath("//div[@id='top-links']//a[text()='Logout']");
 
 
+
+    By lSearchInput = By.cssSelector("#search > input");
+    By lSearchButton = By.cssSelector("#search button");
+
+    By lListedProducts = By.cssSelector(".product-thumb");
+
+    By lMainMenuLinks = By.cssSelector(".nav.navbar-nav > li");
+
 }
